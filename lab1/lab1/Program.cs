@@ -175,41 +175,22 @@ namespace lab1
         registration5
       };
       Print(registration1.Drivers.Select((x => x)));
-      string[] strArray = "40 23 49 30 67 26 51 64 23 32 65 24 23 43 52 61 35 39 57 48 57 30 26 49 57 67 53 49 51 28 34 55 38 44 46 57 32 44 62 28 30 46 49 69 65 40 67 65 58 65 55 24 56 65 47 32 32 45 41 68 54 62 37 61 39 39 69 23 46 63 66 30 37 27 49 37 26 27 56 30 38 60 43 43 60 48 32 68 49 34 52 55 59 46 68 33 58 28 30 56".Split(' ');
-      int num1 = 23;
-      int num2 = 69;
-      int[] numArray = new int[7];
-      int index1 = 0;
-      while (num2 > num1)
-      {
-        int num3 = num1 + 7;
-        for (int index2 = 0; index2 < strArray.Length; ++index2)
-        {
-          if (num1 <= int.Parse(strArray[index2]) && num3 > int.Parse(strArray[index2]))
-            ++numArray[index1];
-        }
-        num1 += 7;
-        ++index1;
-      }
-      for (int index2 = 0; index2 < numArray.Length; ++index2)
-        Console.WriteLine(numArray[index2]);
       Print(registration5.Drivers.Select((x => x.Name)));
       Print(registration2.Drivers.Intersect(registration3.Drivers));
       Print(source.Select((x => x.Vehicle.Manufacturer)).Where((m => m.NumberOfEmployees > 10000)).Distinct());
       Console.WriteLine("Average number of employee is {0}", source.Select(x => x.Vehicle.Manufacturer.NumberOfEmployees).Average());
-      Print(source.GroupBy(registration => registration.Vehicle).Select(g => new
-      {
-        Vehicle = g.Key,
-        Count = g.Count()
-      }));
+        Print(source.GroupBy(registration => registration.Vehicle).Select(g => new
+        {
+          Vehicle = g.Key,
+          Count = g.Count()
+        }));
       IEnumerable<Driver> drivers = registration1.Drivers.Union(registration3.Drivers);
       Print(drivers);
       Print(drivers.OrderBy((x => x.DateOfBirth)));
-      Print(drivers.OrderBy((u => u.DateOfBirth)));
       Print(drivers.Union( registration5.Drivers).Where((x => x.Surname.ToUpper().StartsWith('A'))));
       Console.WriteLine(registration5.Drivers.Select((x => x.Surname)).Aggregate("", ((longest, next) => next.Length <= longest.Length ? longest : next), (surname => surname.ToUpper())));
       Print(registration1.Drivers.Except(registration3.Drivers));
-      Print(source.TakeWhile((x => (uint) x.ConditionCar > 0U)));
+      Print(source.TakeWhile((x => x.ConditionCar > 0)));
       Console.WriteLine(registration1.Drivers.ElementAtOrDefault(224));
       Print(registration1.Drivers.Zip( registration2.Drivers, (first, second) => string.Format("FIRST REGISTRATION: {0}\nSECOND REGISTRATION: {1}\n\n", first, second)));
     }
